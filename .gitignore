@@ -1,0 +1,5 @@
+# pix2pix ignore
+pix2pix/data/ 
+pix2pix/.DS_Store
+pix2pix/*.npz
+pix2pix/*.h5
