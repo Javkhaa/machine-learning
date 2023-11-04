@@ -15,3 +15,4 @@ ultralytics_demo/runs/
 
 # Ignore raw videos
 underwater_object/UOT100/*
+underwater_object/UOT100Images/*
