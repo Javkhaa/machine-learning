@@ -1,19 +1,17 @@
 **/.ipynb_checkpoints/*
 **/.DS_Store
 
+**/runs/
+**/data/
+
 # pix2pix ignore
 pix2pix/data/ 
 pix2pix/.DS_Store
 pix2pix/*.npz
 pix2pix/*.h5
 
-
-# underwater tracking
-underwater_object/data/
-
 ultralytics_demo/*.mp4
 ultralytics_demo/custom_dataset/*
-ultralytics_demo/runs/
 
 # Ignore raw videos
 underwater_object/UOT100/*
