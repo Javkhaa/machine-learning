@@ -1,10 +1,12 @@
+**/.ipynb_checkpoints/*
+**/.DS_Store
+
 # pix2pix ignore
 pix2pix/data/ 
 pix2pix/.DS_Store
 pix2pix/*.npz
 pix2pix/*.h5
 
-**/.ipynb_checkpoints/*
 
 # underwater tracking
 underwater_object/data/
