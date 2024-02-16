@@ -1,21 +1,33 @@
 from ultralytics import YOLO
-import glob
-
-# Load the YOLOv8 model
-# model = YOLO('yolov8n.pt')
-model = YOLO('yolov8n.yaml').load('runs/detect/train/weights/best.pt')  # build from YAML and transfer weights
-results = model.track(source="./shrimp_video.mp4", conf=0.0001655, show=True)  # Tracking with ByteTrack tracker
-
-# count = 0
-# for idx, video in enumerate(sorted(glob.glob("/Users/javkhlan-ochirganbat/repos/machine-learning/underwater_object/UOT100/*/*.mp4"))):
-#     if "shrimp" not in video.lower():
-#         continue
-#     count += 1
-#     if count < 1:
-#         continue
-#     results = model.track(source=video, show=True, tracker="bytetrack.yaml", conf=0.00018, mode="track")  # Tracking with ByteTrack tracker
+import click
 
 
-# Perform tracking with the model
-# results = model.track(source="https://youtu.be/LNwODJXcvt4", show=True)  # Tracking with default tracker
-# results = model.track(source="https://youtu.be/LNwODJXcvt4", show=True, tracker="bytetrack.yaml")  # Tracking with ByteTrack tracker
+@click.command()
+@click.option("--input_video", "-v", type=click.Path(exists=True))
+@click.option("--model_path", "-m", type=click.Path(exists=True))
+@click.option(
+    "--confidence-threshold",
+    "-c",
+    type=click.FloatRange(0.0, 1.0),
+    default=0.5,
+    help="Minimum confidence score for detections to be kept.",
+)
+def process_video(input_video, model_path, confidence_threshold):
+    """
+    Processes a video using a provided model, filtering detections below a confidence threshold.
+
+    Args:
+        input_video (str): Path to the input video file.
+        model_path (str): Path to the model file.
+        confidence_threshold (float): Minimum confidence score for detections.
+    """
+
+    # Load the model
+    model = YOLO(model=model_path)
+    model.track(
+        source=input_video, conf=confidence_threshold, show=True
+    )  # Tracking with ByteTrack tracker
+
+
+if __name__ == "__main__":
+    process_video()
