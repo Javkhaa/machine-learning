@@ -12,7 +12,15 @@ import click
     default=0.5,
     help="Minimum confidence score for detections to be kept.",
 )
-def process_video(input_video, model_path, confidence_threshold):
+@click.option("--show", is_flag=True, default=False, help="Show video")
+@click.option("--save_video", type=str, default=None, help="Save the tracking video")
+def process_video(
+    input_video,
+    model_path,
+    confidence_threshold,
+    show: bool = False,
+    save_video: str | None = None,
+):
     """
     Processes a video using a provided model, filtering detections below a confidence threshold.
 
@@ -24,9 +32,16 @@ def process_video(input_video, model_path, confidence_threshold):
 
     # Load the model
     model = YOLO(model=model_path)
-    model.track(
-        source=input_video, conf=confidence_threshold, show=True
-    )  # Tracking with ByteTrack tracker
+    tracking_parameters = dict(
+        source=input_video,
+        conf=confidence_threshold,
+        show=show,
+    )
+    if save_video:
+        tracking_parameters["save"] = True
+        tracking_parameters["name"] = save_video
+
+    model.track(**tracking_parameters)  # Default tracker is ByteTrack
 
 
 if __name__ == "__main__":
