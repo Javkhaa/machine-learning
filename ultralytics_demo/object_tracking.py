@@ -36,9 +36,11 @@ def process_video(
         source=input_video,
         conf=confidence_threshold,
         show=show,
+        stream=True,
     )
     if save_video:
         tracking_parameters["save"] = True
+        tracking_parameters["save_dir"] = "/Users/javkhlan-ochirganbat/temp/"
         tracking_parameters["name"] = save_video
 
     model.track(**tracking_parameters)  # Default tracker is ByteTrack
