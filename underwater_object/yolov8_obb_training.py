@@ -13,11 +13,11 @@ def train_custom_model(
     Fine tune the latest YOLO v8 or resume training of a given model.
     """
 
+    raise NotImplementedError("YOLO OBB needs custom dataset")
     if resume_training:
-        # model = YOLO("./runs/detect/train13/weights/last.pt")
         model = YOLO(resume_training)
     else:
-        model = YOLO("yolov8n.yaml").load("yolov8n.pt")
+        model = YOLO("yolov8n-obb.pt")
     if verbose:
         model.info()
 

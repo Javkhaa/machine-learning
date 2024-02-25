@@ -2,7 +2,7 @@
 Training and fine tuning
 """
 
-from ultralytics import YOLO
+from ultralytics import NAS
 
 
 def train_custom_model(
@@ -12,12 +12,11 @@ def train_custom_model(
     Training YOLO v8
     Fine tune the latest YOLO v8 or resume training of a given model.
     """
-
+    raise NotImplementedError("YOLO-NAS does not support train yet!")
     if resume_training:
-        # model = YOLO("./runs/detect/train13/weights/last.pt")
-        model = YOLO(resume_training)
+        model = NAS(resume_training)
     else:
-        model = YOLO("yolov8n.yaml").load("yolov8n.pt")
+        model = NAS("/Users/javkhlan-ochirganbat/Downloads/yolo_nas_l.pt")
     if verbose:
         model.info()
 
