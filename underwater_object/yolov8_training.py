@@ -6,7 +6,11 @@ from ultralytics import YOLO
 
 
 def train_custom_model(
-    config_yaml: str, epochs: int, verbose: bool = False, resume_training: str = None
+    config_yaml: str,
+    epochs: int,
+    verbose: bool = False,
+    resume_training: str = None,
+    default_model="yolov8n.pt",
 ):
     """
     Training YOLO v8
@@ -14,10 +18,10 @@ def train_custom_model(
     """
 
     if resume_training:
-        # model = YOLO("./runs/detect/train13/weights/last.pt")
         model = YOLO(resume_training)
     else:
-        model = YOLO("yolov8n.yaml").load("yolov8n.pt")
+        model = YOLO(default_model)
+
     if verbose:
         model.info()
 
@@ -27,7 +31,6 @@ def train_custom_model(
         epochs=epochs,
         device="mps",
         fraction=0.8,
-        # imgsz=(480, 848),
         verbose=verbose,
         weight_decay=0.05,
         lr0=0.1,
